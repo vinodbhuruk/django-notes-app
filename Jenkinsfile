@@ -12,7 +12,7 @@ pipeline{
         stage("Build"){
             steps{
             echo "buiding the code"
-            sh "docker build -t notes-app ."
+            sh "docker build -t notes-app1 ."
             }
         }
         
@@ -20,9 +20,9 @@ pipeline{
             steps{
                 echo "pushing the image to docker Hub"
                 withCredentials([usernamePassword(credentialsId:"dockerhub",passwordVariable:"dockerhubpass",usernameVariable:"dockerhubuser")]){
-                sh "docker tag notes-app ${env.dockerhubuser}/notes-app:latest"
+                sh "docker tag notes-app1 ${env.dockerhubuser}/notes-app1:latest"
                 sh "docker login -u ${env.dockerhubuser} -p ${env.dockerhubpass}"
-                sh "docker push ${env.dockerhubuser}/notes-app:latest"
+                sh "docker push ${env.dockerhubuser}/notes-app1:latest"
                 }
             }
         }
